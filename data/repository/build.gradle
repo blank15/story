@@ -1,0 +1,8 @@
+apply plugin: 'com.android.library'
+apply from: '../../common.gradle'
+
+dependencies {
+    // MODULES
+    implementation project(Modules.domain)
+    implementation project(Modules.remote)
+}

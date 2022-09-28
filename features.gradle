@@ -1,0 +1,42 @@
+apply plugin: 'com.android.library'
+apply from: '../../common.gradle'
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
+android {
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    kapt AndroidLibraries.lifecycleCompiler
+    // KOTLIN
+    implementation KotlinLibraries.kotlin
+    implementation AndroidLibraries.kotlinCoroutineAndroid
+    implementation AndroidLibraries.material
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.core
+    implementation AndroidLibraries.coreKtx
+    implementation AndroidLibraries.fragment
+    implementation AndroidLibraries.fragmentKtx
+    implementation AndroidLibraries.constraintLayout
+    implementation AndroidLibraries.navigation
+    implementation AndroidLibraries.navigationFrag
+    implementation Libraries.shimmer
+
+    implementation Libraries.glide
+    implementation Libraries.glideOkHttp
+
+    // TEST
+    androidTestImplementation TestLibraries.androidTestRunner
+    androidTestImplementation TestLibraries.junitAndroid
+    androidTestImplementation TestLibraries.fragmentNav
+    androidTestImplementation TestLibraries.espresso
+    androidTestImplementation TestLibraries.espressoContrib
+    androidTestImplementation TestLibraries.koin
+    androidTestImplementation TestLibraries.archCoreTest
+    testImplementation TestLibraries.androidTestRunner
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.archCoreTest
+    testImplementation TestLibraries.coroutine
+}

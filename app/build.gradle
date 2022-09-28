@@ -1,0 +1,37 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+apply from: '../common.gradle'
+android {
+    defaultConfig {
+        applicationId "com.blank.story"
+    }
+
+}
+
+dependencies {
+
+    //module
+    implementation project(Modules.navigation)
+
+    implementation AndroidLibraries.core
+    implementation AndroidLibraries.material
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.constraintLayout
+    implementation AndroidLibraries.navigation
+    implementation AndroidLibraries.navigationFrag
+
+
+    androidTestImplementation TestLibraries.androidTestRunner
+    androidTestImplementation TestLibraries.junitAndroid
+    androidTestImplementation TestLibraries.fragmentNav
+    androidTestImplementation TestLibraries.espresso
+    androidTestImplementation TestLibraries.espressoContrib
+    androidTestImplementation TestLibraries.koin
+    androidTestImplementation TestLibraries.archCoreTest
+    testImplementation TestLibraries.androidTestRunner
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.archCoreTest
+    testImplementation TestLibraries.coroutine
+}
