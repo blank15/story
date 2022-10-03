@@ -32,7 +32,7 @@ object Versions {
     const val shimmer = "0.5.0"
 
     const val glide = "4.12.0"
-    const val imagePicker = "2.4.7"
+    const val imagePicker = "3.0.0-beta1"
 
     const val timber = "5.0.1"
 
@@ -67,7 +67,7 @@ object Libraries {
     const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
     // Image Picker
-    const val imagePicker = "com.github.esafirm.android-image-picker:imagepicker:${Versions.imagePicker}"
+    const val imagePicker = "com.github.esafirm:android-image-picker:${Versions.imagePicker}"
 }
 
 object AndroidLibraries {

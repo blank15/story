@@ -5,13 +5,18 @@
       <map>
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.34010416666666665" />
         <entry key="app/src/main/res/layout/activity_splash_screen.xml" value="0.25" />
+        <entry key="core/ui/src/main/res/drawable/bg_line_rounded.xml" value="0.174" />
         <entry key="core/ui/src/main/res/drawable/bg_rounded_blue.xml" value="0.1105" />
         <entry key="core/ui/src/main/res/drawable/ic_baseline_arrow_back_ios_new_24.xml" value="0.1755" />
         <entry key="core/ui/src/main/res/drawable/ic_baseline_visibility_off_24.xml" value="0.1225" />
+        <entry key="core/ui/src/main/res/xml/activity_main_scene.xml" value="0.365625" />
         <entry key="features/authentication/src/main/res/drawable/bg_rounded_blue.xml" value="0.1" />
         <entry key="features/authentication/src/main/res/layout/fragment_login.xml" value="0.34010416666666665" />
-        <entry key="features/authentication/src/main/res/layout/fragment_register.xml" value="0.22" />
-        <entry key="features/home/src/main/res/layout/fragment_add_story.xml" value="0.12604166666666666" />
+        <entry key="features/authentication/src/main/res/layout/fragment_register.xml" value="0.5" />
+        <entry key="features/home/src/main/res/layout/fragment_add_story.xml" value="0.22" />
+        <entry key="features/home/src/main/res/layout/fragment_dashboard.xml" value="0.365625" />
+        <entry key="features/home/src/main/res/layout/fragment_detail_story.xml" value="0.365625" />
+        <entry key="features/home/src/main/res/layout/item_story.xml" value="0.365625" />
       </map>
     </option>
   </component>

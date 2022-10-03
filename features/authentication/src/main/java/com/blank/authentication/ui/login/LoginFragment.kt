@@ -1,17 +1,15 @@
 package com.blank.authentication.ui.login
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.blank.authentication.databinding.FragmentLoginBinding
 import com.blank.domain.model.Resource
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import timber.log.Timber
 
 class LoginFragment : Fragment() {
 
@@ -64,13 +62,19 @@ class LoginFragment : Fragment() {
     private fun initView() {
         binding?.apply {
             tvRegister.setOnClickListener {
+
                 findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())
             }
 
-            btnLogin.setOnClickListener{
-                viewModelLogin.login(edEmail.text.toString(),edPassword.text.toString())
+            btnLogin.setOnClickListener {
+                viewModelLogin.login(edLoginEmail.text.toString(), edLoginPassword.text.toString())
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModelLogin.cancelJob()
     }
 
     override fun onDestroy() {

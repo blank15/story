@@ -34,6 +34,7 @@ dependencies {
 
     implementation Libraries.glide
     implementation Libraries.glideOkHttp
+    implementation Libraries.imagePicker
 
     // TEST
     androidTestImplementation TestLibraries.androidTestRunner

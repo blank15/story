@@ -4,4 +4,9 @@
     <string name="dont_have_accoung">Belum punya akun ?</string>
     <string name="register">Register</string>
     <string name="insert_your_name">Masukkan nama anda</string>
+    <string name="detail_story">Detail Stori</string>
+    <string name="add_description">Masukkan Deskripsi</string>
+    <string name="story_apps">Story Apps</string>
+    <string name="logout">Logout</string>
+    <string name="add_story">Tambah Story</string>
 </resources>

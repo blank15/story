@@ -34,6 +34,7 @@ android {
     buildFeatures {
         dataBinding true
     }
+    
 }
 
 dependencies {
@@ -42,4 +43,5 @@ dependencies {
     implementation Libraries.koin
     implementation Libraries.koinCore
     implementation Libraries.koinJava
+    implementation Libraries.imagePicker
 }

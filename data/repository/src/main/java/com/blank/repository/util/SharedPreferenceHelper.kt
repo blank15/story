@@ -13,14 +13,20 @@ class SharedPreferenceHelper(private val sharedPreferences: SharedPreferences) {
         e.apply()
     }
 
-    fun getSharedPreferences(key: String, defValue:Boolean): Boolean {
+    fun getSharedPreferences(key: String, defValue: Boolean): Boolean {
         return sharedPreferences.getBoolean(key, defValue)
     }
 
-    fun setPreferences(key: String, value: Boolean ) {
+    fun setPreferences(key: String, value: Boolean) {
         val e = sharedPreferences.edit()
         e.putBoolean(key, value)
         e.apply()
+    }
+
+    fun clearData() {
+        val e = sharedPreferences.edit().clear()
+        e.apply()
+
     }
 
 }

@@ -2,25 +2,69 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph_main"
-    app:startDestination="@id/dashboardFragment">
+    app:startDestination="@id/loginFragment">
 
     <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.blank.home.ui.dashboard.DashboardFragment"
-        android:label="DashboardFragment" >
+        android:label="DashboardFragment">
         <action
             android:id="@+id/action_dashboardFragment_to_detailStoryFragment"
             app:destination="@id/detailStoryFragment" />
         <action
             android:id="@+id/action_dashboardFragment_to_addStoryFragment"
             app:destination="@id/addStoryFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/dashboardFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/detailStoryFragment"
         android:name="com.blank.home.ui.detailstory.DetailStoryFragment"
-        android:label="DetailStoryFragment" />
+        android:label="DetailStoryFragment">
+        <argument
+            android:name="story"
+            app:argType="com.blank.model.story.StoryResult" />
+    </fragment>
     <fragment
         android:id="@+id/addStoryFragment"
         android:name="com.blank.home.ui.addstory.AddStoryFragment"
-        android:label="AddStoryFragment" />
+        android:label="AddStoryFragment">
+        <action
+            android:id="@+id/action_addStoryFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/addStoryFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.blank.authentication.ui.login.LoginFragment"
+        android:label="LoginFragment">
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.blank.authentication.ui.register.RegisterFragment"
+        android:label="RegisterFragment">
+        <action
+            android:id="@+id/action_registerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_nav_graph_main"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@id/nav_graph_main"
+            app:popUpToInclusive="true" />
+    </fragment>
+
 </navigation>

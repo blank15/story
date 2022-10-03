@@ -1,20 +1,22 @@
 package com.blank.remote.di
 
 import com.blank.remote.api.AuthService
+import com.blank.remote.api.StoriesService
 import com.blank.remote.datasource.AuthDataSource
+import com.blank.remote.datasource.StoriesDataSource
+import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import com.google.gson.GsonBuilder
 import java.util.concurrent.TimeUnit
 
 private const val TIMEOUT = 60L
 
 fun remoteModule(baseUrl: String) = module {
-    single<Interceptor> { AuthInterceptor(get()) }
+    factory<Interceptor> { AuthInterceptor(get()) }
 
     single {
         GsonBuilder()
@@ -24,7 +26,7 @@ fun remoteModule(baseUrl: String) = module {
             .create()
     }
 
-    factory {
+    single {
         val httpLoggingInterceptor = HttpLoggingInterceptor()
         httpLoggingInterceptor.level = HttpLoggingInterceptor.Level.BODY
         OkHttpClient.Builder()
@@ -46,6 +48,8 @@ fun remoteModule(baseUrl: String) = module {
     }
 
     factory { get<Retrofit>().create(AuthService::class.java) }
+    factory { get<Retrofit>().create(StoriesService::class.java) }
 
     factory { AuthDataSource(get()) }
+    factory { StoriesDataSource(get()) }
 }

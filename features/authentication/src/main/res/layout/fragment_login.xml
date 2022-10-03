@@ -31,7 +31,7 @@
         <com.blank.ui.util.EditTextEmail
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ed_email"
+            android:id="@+id/ed_login_email"
             android:layout_margin="18dp"
             app:layout_constraintTop_toBottomOf="@+id/tv_login"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,9 +40,9 @@
         <com.blank.ui.util.EditTextPassword
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/ed_password"
+            android:id="@+id/ed_login_password"
             android:layout_margin="18dp"
-            app:layout_constraintTop_toBottomOf="@+id/ed_email"
+            app:layout_constraintTop_toBottomOf="@+id/ed_login_email"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
@@ -55,18 +55,19 @@
             android:textColor="@android:color/white"
             android:gravity="center"
             android:background="@drawable/bg_rounded_blue"
-            app:layout_constraintTop_toBottomOf="@+id/ed_password"
-            app:layout_constraintStart_toStartOf="@+id/ed_password"
-            app:layout_constraintEnd_toEndOf="@id/ed_password" />
+            app:layout_constraintEnd_toEndOf="@id/ed_login_password"
+            app:layout_constraintStart_toStartOf="@+id/ed_login_password"
+            app:layout_constraintTop_toBottomOf="@+id/ed_login_password" />
+
         <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="18dp"
             android:id="@+id/loading"
             android:gravity="center"
-            app:layout_constraintTop_toBottomOf="@+id/ed_password"
-            app:layout_constraintStart_toStartOf="@+id/ed_password"
-            app:layout_constraintEnd_toEndOf="@id/ed_password"/>
+            app:layout_constraintEnd_toEndOf="@id/ed_login_password"
+            app:layout_constraintStart_toStartOf="@+id/ed_login_password"
+            app:layout_constraintTop_toBottomOf="@+id/ed_login_password" />
 
         <TextView
             android:layout_width="wrap_content"

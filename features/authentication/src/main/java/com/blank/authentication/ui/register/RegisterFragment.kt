@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.blank.authentication.databinding.FragmentRegisterBinding
@@ -29,20 +28,9 @@ class RegisterFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        handleBackEvent()
 
         initView()
         initObserver()
-
-        binding?.apply {
-            toolbar.apply {
-                setNavigationOnClickListener {
-                    if (!findNavController().navigateUp())
-                        requireActivity().finish()
-                }
-                setNavigationIcon(com.blank.ui.R.drawable.ic_baseline_arrow_back_ios_new_24)
-            }
-        }
     }
 
     private fun initObserver() {
@@ -89,15 +77,27 @@ class RegisterFragment : Fragment() {
 
     private fun initView() {
         binding?.apply {
-
+            toolbar.apply {
+                setNavigationOnClickListener {
+                    if (!findNavController().navigateUp())
+                        requireActivity().finish()
+                }
+                setNavigationIcon(com.blank.ui.R.drawable.ic_baseline_arrow_back_ios_new_24)
+                title = resources.getString(com.blank.ui.R.string.register)
+            }
             btnRegister.setOnClickListener {
                 viewModelRegister.register(
-                    edEmail.text.toString(),
-                    edPassword.text.toString(),
-                    edName.text.toString()
+                    edRegisterEmail.text.toString(),
+                    edRegisterPassword.text.toString(),
+                    edRegisterName.text.toString()
                 )
             }
         }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModelRegister.cancelJob()
     }
 
     override fun onDestroy() {
@@ -105,15 +105,5 @@ class RegisterFragment : Fragment() {
         _binding = null
     }
 
-    private fun handleBackEvent() {
-        activity?.onBackPressedDispatcher?.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    isEnabled = false
-                    activity?.onBackPressed()
-                }
-            })
-    }
 
 }
