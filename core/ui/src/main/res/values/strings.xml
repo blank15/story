@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="login">Login</string>
+    <string name="dont_have_accoung">Belum punya akun ?</string>
+    <string name="register">Register</string>
+    <string name="insert_your_name">Masukkan nama anda</string>
+</resources>

@@ -1,18 +1,21 @@
 object Modules {
     const val model = ":data:model"
     const val remote = ":data:remote"
+    const val local = ":data:local"
     const val repository = ":data:repository"
     const val domain =":domain"
-    const val authentication = ":features:authentication"
+    const val homeFeature = ":features:home"
+    const val authenticationFeature = ":features:authentication"
     const val navigation = ":navigation"
+    const val ui = ":core:ui"
 }
 
 object Versions {
     const val kotlin = "1.7.0"
-    const val coroutines = "1.6.0"
+    const val coroutines = "1.5.9"
     const val material = "1.4.0"
-    const val appCompat = "1.5.1"
-    const val lifecycle = "2.6.0"
+    const val appCompat = "1.4.2"
+    const val lifecycle = "2.5.1"
     const val fragment = "1.5.2"
 
     const val koin = "3.1.4"
@@ -22,7 +25,7 @@ object Versions {
     const val okHttp = "4.9.3"
     const val retrofit = "2.9.0"
     const val nav = "2.3.5"
-    const val core = "1.9.0"
+    const val core = "1.6.0"
     const val constraintLayout = "2.1.4"
     const val camera = "1.0.2"
     const val additionalCamera = "1.0.0-alpha28"
@@ -87,7 +90,10 @@ object AndroidLibraries {
     // KOTLIN
     const val kotlinCoroutineAndroid = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
 
+    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime:${Versions.lifecycle}"
+    const val lifecycleViewModel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
     const val lifecycleCompiler = "androidx.lifecycle:lifecycle-compiler:${Versions.lifecycle}"
+    const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
 
 
     // NAV

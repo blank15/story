@@ -1,6 +1,13 @@
 apply plugin: 'com.android.library'
 apply from: '../common.gradle'
 
+
+android {
+    buildFeatures {
+        dataBinding true
+    }
+}
 dependencies {
     // MODULES
+    implementation project(Modules.model)
 }

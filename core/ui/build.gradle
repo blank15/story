@@ -1,0 +1,35 @@
+apply plugin: 'com.android.library'
+apply from: '../../common.gradle'
+
+android {
+    defaultConfig {
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    implementation project(Modules.domain)
+    kapt AndroidLibraries.lifecycleCompiler
+    // KOTLIN
+    implementation KotlinLibraries.kotlin
+    implementation AndroidLibraries.kotlinCoroutineAndroid
+    implementation AndroidLibraries.material
+    implementation AndroidLibraries.appCompat
+    implementation AndroidLibraries.core
+    implementation AndroidLibraries.coreKtx
+    implementation AndroidLibraries.fragment
+    implementation AndroidLibraries.fragmentKtx
+    implementation AndroidLibraries.constraintLayout
+    implementation AndroidLibraries.navigation
+    implementation AndroidLibraries.navigationFrag
+    implementation AndroidLibraries.lifecycleViewModel
+    implementation AndroidLibraries.liveData
+
+    implementation Libraries.shimmer
+
+    implementation Libraries.glide
+    implementation Libraries.glideOkHttp
+}

@@ -4,4 +4,14 @@ apply from: '../../common.gradle'
 dependencies {
     // MODULES
     implementation project(Modules.model)
+    implementation project(Modules.domain)
+    implementation project(Modules.local)
+    // KOIN
+    api Libraries.koin
+    // NETWORK
+    api Libraries.gson
+    api Libraries.retrofit
+
+    implementation Libraries.retrofitGsonConverter
+    implementation Libraries.httpLoggingInterceptor
 }

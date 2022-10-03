@@ -14,6 +14,13 @@ dependencies {
 
     //module
     implementation project(Modules.navigation)
+    implementation project(Modules.local)
+    implementation project(Modules.repository)
+    implementation project(Modules.remote)
+    implementation project(Modules.domain)
+    implementation project(Modules.ui)
+    implementation project(Modules.homeFeature)
+    implementation project(Modules.authenticationFeature)
 
     implementation AndroidLibraries.core
     implementation AndroidLibraries.material
@@ -21,6 +28,14 @@ dependencies {
     implementation AndroidLibraries.constraintLayout
     implementation AndroidLibraries.navigation
     implementation AndroidLibraries.navigationFrag
+
+    implementation "androidx.navigation:navigation-fragment:${Versions.nav}"
+    implementation "androidx.navigation:navigation-ui:${Versions.nav}"
+
+
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinJava
 
 
     androidTestImplementation TestLibraries.androidTestRunner

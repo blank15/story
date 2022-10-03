@@ -1,0 +1,12 @@
+apply plugin: 'com.android.library'
+apply from: '../../common.gradle'
+
+dependencies {
+    // MODULES
+    implementation project(Modules.model)
+
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinJava
+
+}

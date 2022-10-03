@@ -5,4 +5,10 @@ dependencies {
     // MODULES
     implementation project(Modules.domain)
     implementation project(Modules.remote)
+    implementation project(Modules.local)
+    implementation project(Modules.model)
+
+    // KOIN
+    implementation Libraries.koin
+    implementation Libraries.koinJava
 }

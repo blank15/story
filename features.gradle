@@ -9,6 +9,11 @@ android {
 }
 
 dependencies {
+
+    implementation project(Modules.ui)
+    implementation project(Modules.model)
+    api project(Modules.navigation)
+
     kapt AndroidLibraries.lifecycleCompiler
     // KOTLIN
     implementation KotlinLibraries.kotlin
@@ -22,6 +27,9 @@ dependencies {
     implementation AndroidLibraries.constraintLayout
     implementation AndroidLibraries.navigation
     implementation AndroidLibraries.navigationFrag
+    implementation AndroidLibraries.lifecycleViewModel
+    implementation AndroidLibraries.liveData
+
     implementation Libraries.shimmer
 
     implementation Libraries.glide
