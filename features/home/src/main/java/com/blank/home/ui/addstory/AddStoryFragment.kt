@@ -1,6 +1,9 @@
 package com.blank.home.ui.addstory
 
+import android.database.Cursor
 import android.os.Bundle
+import android.provider.MediaStore
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,6 +20,7 @@ import com.esafirm.imagepicker.features.registerImagePicker
 import com.esafirm.imagepicker.model.Image
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
+
 
 class AddStoryFragment : Fragment() {
 
@@ -85,7 +89,10 @@ class AddStoryFragment : Fragment() {
                 val desc = edDesc.text.toString()
                 if (imageUri != null && desc.isNotEmpty()) {
                     imageUri?.let {
-                        viewModelAddStory.uploadStory(desc, File(it.path))
+                        val path = getFilePathFromImage(it)
+                        path?.let { pathActual ->
+                            viewModelAddStory.uploadStory(desc, File(pathActual))
+                        }
                     }
                 } else
                     Toast.makeText(context, "Terdapat data yang belum di isi", Toast.LENGTH_SHORT)
@@ -101,6 +108,29 @@ class AddStoryFragment : Fragment() {
                 setNavigationIcon(com.blank.ui.R.drawable.ic_baseline_arrow_back_ios_new_24)
                 title = resources.getString(com.blank.ui.R.string.add_story)
             }
+        }
+    }
+
+    private fun getFilePathFromImage(image: Image?): String? {
+        if (image == null) return null
+        if (!TextUtils.isEmpty(image.path) && File(image.path).exists()) {
+            return image.path
+        } else {
+            val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+            val cursor: Cursor? = requireActivity().contentResolver.query(
+                image.uri,
+                filePathColumn, null, null, null
+            )
+            cursor?.moveToFirst()
+            val columnIndex: Int? = cursor?.getColumnIndex(filePathColumn[0])
+            var imgFilePath: String? = null
+            if (columnIndex != -1) {
+                columnIndex?.let {
+                    imgFilePath = cursor.getString(it)
+                }
+            }
+            cursor?.close()
+            return imgFilePath
         }
     }
 

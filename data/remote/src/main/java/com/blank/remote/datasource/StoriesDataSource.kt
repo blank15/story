@@ -1,5 +1,6 @@
 package com.blank.remote.datasource
 
+import android.util.Log
 import com.blank.model.BaseResponse
 import com.blank.model.story.StoryItemResponse
 import com.blank.remote.api.StoriesService
@@ -17,6 +18,8 @@ class StoriesDataSource(private val storiesService: StoriesService) {
     suspend fun uploadStory(desc: String, file: File): Response<BaseResponse> {
         val description = desc.toRequestBody("text/plain".toMediaType())
         val requestImageFile = file.asRequestBody("image/jpeg".toMediaTypeOrNull())
+
+        Log.e("error", "error ${file.path}")
         val imageMultipart: MultipartBody.Part = MultipartBody.Part.createFormData(
             "photo", file.name, requestImageFile
         )
