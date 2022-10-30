@@ -10,6 +10,7 @@ import io.mockk.mockk
 import io.mockk.spyk
 import io.mockk.verifyOrder
 import kotlinx.coroutines.flow.flow
+import org.junit.Assert
 import org.junit.Test
 
 class RegisterViewModelTest : BaseTest() {
@@ -54,6 +55,10 @@ class RegisterViewModelTest : BaseTest() {
         verifyOrder {
             loginResponseObserver.onChanged(resultLogin)
         }
+        Assert.assertEquals(
+            Resource.Status.SUCCESS,
+            registerViewModel.registerResponse.value?.status
+        )
 
     }
 
@@ -78,6 +83,11 @@ class RegisterViewModelTest : BaseTest() {
             registerResponseObserver.onChanged(result)
         }
 
+        Assert.assertEquals(Resource.Status.ERROR, registerViewModel.registerResponse.value?.status)
+        Assert.assertEquals(
+            result.error?.message,
+            registerViewModel.registerResponse.value?.error?.message
+        )
 
     }
 

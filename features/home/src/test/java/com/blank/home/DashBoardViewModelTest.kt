@@ -107,6 +107,9 @@ class DashBoardViewModelTest {
         verifyOrder {
             storiesMapObserver.onChanged(responseSuccess)
         }
+
+        Assert.assertEquals(Resource.Status.SUCCESS, dashboardViewModel.storiesMap.value?.status)
+        Assert.assertEquals(result.size, dashboardViewModel.storiesMap.value?.data?.size)
     }
 
     @Test
@@ -125,6 +128,7 @@ class DashBoardViewModelTest {
         verifyOrder {
             storiesMapObserver.onChanged(responseSuccess)
         }
+        Assert.assertEquals(Resource.Status.ERROR, dashboardViewModel.storiesMap.value?.status)
     }
 
 }
