@@ -48,4 +48,10 @@ dependencies {
     testImplementation TestLibraries.junit
     testImplementation TestLibraries.archCoreTest
     testImplementation TestLibraries.coroutine
+    testImplementation TestLibraries.mockitoCore
+    testImplementation TestLibraries.mockitoInline
+    androidTestImplementation TestLibraries.mockkAndroid
+    testImplementation TestLibraries.mockk
+    testImplementation TestLibraries.mockkJvm
+
 }

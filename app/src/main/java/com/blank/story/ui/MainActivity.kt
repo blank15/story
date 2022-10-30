@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
         val graph = inflater.inflate(com.blank.navigation.R.navigation.nav_graph_main)
 
-        val destination = if (auhtRepository.isLogin) com.blank.navigation.R.id.dashboardFragment
+        val destination = if (auhtRepository.isLogin) com.blank.navigation.R.id.mainFragment
         else com.blank.navigation.R.id.loginFragment
 
         graph.startDestination = destination

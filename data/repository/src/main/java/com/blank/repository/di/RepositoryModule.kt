@@ -10,9 +10,9 @@ import org.koin.dsl.module
 val repositoryModule = module {
     single { SharedPreferenceHelper(get()) }
 
-    factory {
-        AuthRepositoryImpl(get(), get()) as AuthRepository
+    factory<AuthRepository> {
+        AuthRepositoryImpl(get(), get())
     }
-    factory { StoriesRepositoryImpl(get(), get()) as StoriesRepository }
+    factory<StoriesRepository> { StoriesRepositoryImpl(get(), get(), get()) }
 }
 

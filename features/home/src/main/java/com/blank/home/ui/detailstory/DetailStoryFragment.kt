@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.transition.TransitionInflater
 import com.blank.home.databinding.FragmentDetailStoryBinding
-import com.blank.model.story.StoryResult
+import com.blank.model.database.StoryModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
@@ -17,7 +17,7 @@ class DetailStoryFragment : Fragment() {
 
     private var _binding: FragmentDetailStoryBinding? = null
     private val binding get() = _binding
-    private lateinit var story: StoryResult
+    private lateinit var story: StoryModel
     private val args: DetailStoryFragmentArgs by navArgs()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

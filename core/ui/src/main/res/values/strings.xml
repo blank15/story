@@ -9,4 +9,7 @@
     <string name="story_apps">Story Apps</string>
     <string name="logout">Logout</string>
     <string name="add_story">Tambah Story</string>
+    <string name="ulangi">Ulangi</string>
+    <string name="list">List</string>
+    <string name="map">Map</string>
 </resources>

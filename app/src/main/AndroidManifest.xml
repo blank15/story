@@ -31,9 +31,11 @@
         </activity>
         <activity
             android:name=".ui.MainActivity"
-            android:exported="false">
+            android:exported="false"></activity>
 
-        </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDPQ0F3u4CYH7RB6ePFJ3ZQ-Kco6qfrCzI" />
     </application>
     <queries>
         <intent>

@@ -94,12 +94,6 @@ class RegisterFragment : Fragment() {
             }
         }
     }
-
-    override fun onPause() {
-        super.onPause()
-        viewModelRegister.cancelJob()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

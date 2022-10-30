@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
-import com.blank.domain.model.Resource
 import com.blank.home.databinding.FragmentDashboardBinding
-import com.blank.model.story.StoryResult
-import org.koin.androidx.viewmodel.ext.android.viewModel
+import com.blank.home.ui.adapter.LoadingStateAdapter
+import com.blank.home.ui.adapter.RecyclerViewStory
+import com.blank.model.database.StoryModel
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class DashboardFragment : Fragment(), RecyclerViewStory.StoriesClicked {
 
@@ -20,7 +20,7 @@ class DashboardFragment : Fragment(), RecyclerViewStory.StoriesClicked {
     private val binding get() = _binding
     private lateinit var adapterStories: RecyclerViewStory
 
-    private val viewModelDashBoard: DashboardViewModel by viewModel()
+    private val viewModelDashBoard: DashboardViewModel by sharedViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,42 +40,23 @@ class DashboardFragment : Fragment(), RecyclerViewStory.StoriesClicked {
 
     private fun initView() {
         binding?.apply {
-            tvLogout.setOnClickListener {
-                viewModelDashBoard.logout()
-                findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToLoginFragment())
-            }
+
             btnAddStory.setOnClickListener {
                 findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToAddStoryFragment())
             }
-
+            adapterStories = RecyclerViewStory(this@DashboardFragment)
+            rvStory.adapter = adapterStories.withLoadStateFooter(
+                footer = LoadingStateAdapter {
+                    adapterStories.retry()
+                }
+            )
         }
     }
 
     private fun initObserver() {
         viewModelDashBoard.stories.observe(viewLifecycleOwner) {
-            when (it.status) {
-                Resource.Status.LOADING -> {
-                    binding?.loading?.visibility = View.VISIBLE
-                }
-                Resource.Status.SUCCESS -> {
-                    binding?.loading?.visibility = View.GONE
-                    it.data?.let { data ->
-                        adapterStories = RecyclerViewStory(data, this)
-                        binding?.rvStory?.adapter = adapterStories
-                    }
-                }
-                Resource.Status.ERROR -> {
-                    binding?.loading?.visibility = View.GONE
-                    Toast.makeText(context, it.error?.message ?: "", Toast.LENGTH_SHORT).show()
-                }
-            }
+            adapterStories.submitData(lifecycle, it)
         }
-    }
-
-
-    override fun onPause() {
-        super.onPause()
-        viewModelDashBoard.cancelJob()
     }
 
     override fun onDestroy() {
@@ -83,14 +64,17 @@ class DashboardFragment : Fragment(), RecyclerViewStory.StoriesClicked {
         _binding = null
     }
 
-    override fun onItemClicked(item: StoryResult, img: AppCompatImageView) {
+    override fun onItemClicked(item: StoryModel, img: AppCompatImageView) {
 
-        findNavController().navigate(
-            DashboardFragmentDirections.actionDashboardFragmentToDetailStoryFragment(item),
-            FragmentNavigatorExtras(
-                img to item.photoUrl
+        item.photoUrl?.let {
+            findNavController().navigate(
+                DashboardFragmentDirections.actionDashboardFragmentToDetailStoryFragment(item),
+                FragmentNavigatorExtras(
+                    img to it
+                )
             )
-        )
+        }
+
     }
 
 

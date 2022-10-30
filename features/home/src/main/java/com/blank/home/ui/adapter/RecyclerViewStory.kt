@@ -1,18 +1,32 @@
-package com.blank.home.ui.dashboard
+package com.blank.home.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.blank.home.databinding.ItemStoryBinding
-import com.blank.model.story.StoryResult
+import com.blank.model.database.StoryModel
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 
 class RecyclerViewStory(
-    private val listStory: List<StoryResult>,
     private val itemClicked: StoriesClicked
-) : RecyclerView.Adapter<RecyclerViewStory.StoryViewHolder>() {
+) : PagingDataAdapter<StoryModel, RecyclerViewStory.StoryViewHolder>(DIFF_CALLBACK) {
+
+    companion object {
+        val DIFF_CALLBACK = object : DiffUtil.ItemCallback<StoryModel>() {
+            override fun areItemsTheSame(oldItem: StoryModel, newItem: StoryModel): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: StoryModel, newItem: StoryModel): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StoryViewHolder {
         return StoryViewHolder(
             ItemStoryBinding.inflate(LayoutInflater.from(parent.context), parent, false),
@@ -21,18 +35,18 @@ class RecyclerViewStory(
     }
 
     override fun onBindViewHolder(holder: StoryViewHolder, position: Int) {
-        val item = listStory[position]
-        holder.bind(item)
+        val item = getItem(position)
+        item?.let {
+            holder.bind(it)
+        }
 
     }
-
-    override fun getItemCount(): Int = listStory.size
 
     class StoryViewHolder(
         private val itemStoryBinding: ItemStoryBinding,
         private val itemClicked: StoriesClicked
     ) : RecyclerView.ViewHolder(itemStoryBinding.root) {
-        fun bind(story: StoryResult) {
+        fun bind(story: StoryModel) {
             itemStoryBinding.apply {
                 tvItemDesc.text = story.description
                 tvItemName.text = story.name
@@ -50,6 +64,6 @@ class RecyclerViewStory(
     }
 
     interface StoriesClicked {
-        fun onItemClicked(item: StoryResult, img: AppCompatImageView)
+        fun onItemClicked(item: StoryModel, img: AppCompatImageView)
     }
 }

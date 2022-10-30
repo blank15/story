@@ -7,6 +7,7 @@ import org.koin.dsl.module
 
 val sharedPreferenceModule = module {
     single { provideSettingsPreferences(androidContext()) }
+    single { StoryDatabase.getInstance(androidContext()) }
 }
 
 private const val PREFERENCES_FILE_KEY = "com.blank.story"

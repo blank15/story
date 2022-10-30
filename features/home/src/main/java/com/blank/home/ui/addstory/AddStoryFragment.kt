@@ -134,11 +134,6 @@ class AddStoryFragment : Fragment() {
         }
     }
 
-    override fun onPause() {
-        super.onPause()
-        viewModelAddStory.cancelJob()
-    }
-
     override fun onDestroy() {
         super.onDestroy()
         _binding = null

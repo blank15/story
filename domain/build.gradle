@@ -10,4 +10,6 @@ android {
 dependencies {
     // MODULES
     implementation project(Modules.model)
+
+    implementation project(Modules.local)
 }

@@ -1,5 +1,6 @@
 apply from: '../../features.gradle'
 apply plugin: 'org.jetbrains.kotlin.android'
+apply plugin: 'com.google.android.libraries.mapsplatform.secrets-gradle-plugin'
 
 android {
     defaultConfig {
@@ -13,4 +14,6 @@ android {
 dependencies {
     implementation project(Modules.domain)
     api Libraries.imagePicker
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'androidx.appcompat:appcompat:1.5.1'
 }

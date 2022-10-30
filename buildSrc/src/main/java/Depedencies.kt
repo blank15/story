@@ -30,6 +30,8 @@ object Versions {
     const val camera = "1.0.2"
     const val additionalCamera = "1.0.0-alpha28"
     const val shimmer = "0.5.0"
+    const val paging = "3.1.0"
+    const val room = "2.5.0-beta01"
 
     const val glide = "4.12.0"
     const val imagePicker = "3.0.0-beta1"
@@ -41,6 +43,8 @@ object Versions {
     const val archCoreTest = "2.1.0"
     const val androidJunit = "1.1.3"
     const val junit = "4.13.2"
+    const val mockito = "3.12.4"
+    const val mockk = "1.12.1"
 }
 
 object Libraries {
@@ -68,6 +72,16 @@ object Libraries {
 
     // Image Picker
     const val imagePicker = "com.github.esafirm:android-image-picker:${Versions.imagePicker}"
+
+    //paging
+    const val paging3 = "androidx.paging:paging-runtime-ktx:${Versions.paging}"
+
+    //room
+    const val roomCompiler = "androidx.room:room-compiler:${Versions.room}"
+    const val roomCommon = "androidx.room:room-common:${Versions.room}"
+    const val roomRunTime = "androidx.room:room-runtime:${Versions.room}"
+    const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
+    const val roomPaging = "androidx.room:room-paging:${Versions.room}"
 }
 
 object AndroidLibraries {
@@ -122,6 +136,15 @@ object TestLibraries {
 
     // COROUTINE
     const val coroutine = "org.jetbrains.kotlinx:kotlinx-coroutines-test:${Versions.coroutines}"
+
+    //mockito
+    const val mockitoCore = "org.mockito:mockito-core:${Versions.mockito}"
+    const val mockitoInline = "org.mockito:mockito-inline:${Versions.mockito}"
+
+    // MOCK
+    const val mockkAndroid = "io.mockk:mockk-android:${Versions.mockk}"
+    const val mockkJvm = "io.mockk:mockk-agent-jvm:${Versions.mockk}"
+    const val mockk = "io.mockk:mockk:${Versions.mockk}"
 }
 
 object PluginLibraries {

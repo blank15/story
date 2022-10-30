@@ -46,7 +46,7 @@ class LoginFragment : Fragment() {
                         loading.visibility = View.GONE
                     }
 
-                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToDashboardFragment())
+                    findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToMainFragment())
                 }
                 Resource.Status.ERROR -> {
                     Toast.makeText(context, it.error?.message ?: "", Toast.LENGTH_SHORT).show()
@@ -70,11 +70,6 @@ class LoginFragment : Fragment() {
                 viewModelLogin.login(edLoginEmail.text.toString(), edLoginPassword.text.toString())
             }
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewModelLogin.cancelJob()
     }
 
     override fun onDestroy() {

@@ -13,5 +13,9 @@ data class StoryResult(
     @SerializedName("photoUrl")
     val photoUrl: String,
     @SerializedName("description")
-    val description: String
+    val description: String,
+    @SerializedName("lat")
+    val lat: Double?,
+    @SerializedName("lon")
+    val lon: Double?
 ) : Parcelable

@@ -3,7 +3,7 @@ apply plugin: 'kotlin-parcelize'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdk 31
+    compileSdk 33
     defaultConfig {
         minSdk 21
         targetSdk 31
@@ -27,6 +27,7 @@ android {
     }
     kotlinOptions {
         jvmTarget = "1.8"
+        freeCompilerArgs += ["-Xopt-in=kotlin.RequiresOptIn"]
     }
     testOptions {
         unitTests.returnDefaultValues = true
@@ -34,7 +35,6 @@ android {
     buildFeatures {
         dataBinding true
     }
-    
 }
 
 dependencies {
@@ -44,4 +44,25 @@ dependencies {
     implementation Libraries.koinCore
     implementation Libraries.koinJava
     implementation Libraries.imagePicker
+    implementation Libraries.paging3
+    implementation Libraries.roomRunTime
+    implementation Libraries.roomKtx
+    implementation Libraries.roomPaging
+    kapt Libraries.roomCompiler
+
+    // TEST
+    androidTestImplementation TestLibraries.androidTestRunner
+    androidTestImplementation TestLibraries.junitAndroid
+    androidTestImplementation TestLibraries.koin
+    androidTestImplementation TestLibraries.archCoreTest
+    androidTestImplementation TestLibraries.coroutine
+    testImplementation TestLibraries.androidTestRunner
+    testImplementation TestLibraries.junit
+    testImplementation TestLibraries.archCoreTest
+    testImplementation TestLibraries.coroutine
+    testImplementation TestLibraries.mockitoCore
+    testImplementation TestLibraries.mockitoInline
+    androidTestImplementation TestLibraries.mockkAndroid
+    testImplementation TestLibraries.mockk
+    testImplementation TestLibraries.mockkJvm
 }
