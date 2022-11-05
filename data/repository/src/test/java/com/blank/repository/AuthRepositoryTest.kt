@@ -13,6 +13,7 @@ import io.mockk.mockk
 import io.mockk.spyk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.last
 import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
@@ -47,38 +48,38 @@ class AuthRepositoryTest {
 
     @Test
     fun `when login should return success`() = runTest {
-        //given
+        // given
         val email = "cobatest@gmail.com"
         val password = "123456"
         val dataLogin = LoginResponseResult("123", "name", "Aizasda")
         val response = LoginResponse(false, "success", dataLogin)
         val result = Response.success(response)
 
-        //when
+        // when
         coEvery {
             authDataSource.login(email, password)
         } returns result
 
         val callData = authRepository.login(email, password)
 
-        Assert.assertNotNull(callData)
+        Assert.assertEquals(dataLogin, callData.last().data)
     }
 
     @Test
     fun `when register should return success`() = runTest {
-        //given
+        // given
         val email = "cobatest@gmail.com"
         val password = "123456"
         val name = "cobatest"
         val result = Response.success(BaseResponse(false, "success"))
 
-        //when
+        // when
         coEvery {
             authDataSource.register(email, password, name)
         } returns result
 
         val callData = authRepository.register(email, password, name)
 
-        Assert.assertNotNull(callData)
+        Assert.assertEquals(result.message(), callData.last().message)
     }
 }

@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.findNavController
 import com.blank.home.databinding.FragmentDashboardBinding
+import com.blank.home.ui.MainFragmentDirections
 import com.blank.home.ui.adapter.LoadingStateAdapter
 import com.blank.home.ui.adapter.RecyclerViewStory
 import com.blank.model.database.StoryModel
@@ -23,7 +24,8 @@ class DashboardFragment : Fragment(), RecyclerViewStory.StoriesClicked {
     private val viewModelDashBoard: DashboardViewModel by sharedViewModel()
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
@@ -32,17 +34,19 @@ class DashboardFragment : Fragment(), RecyclerViewStory.StoriesClicked {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewModelDashBoard.getStories()
         initObserver()
         initView()
     }
 
+    override fun onResume() {
+        viewModelDashBoard.getStories()
+        super.onResume()
+    }
+
     private fun initView() {
         binding?.apply {
-
             btnAddStory.setOnClickListener {
-                findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToAddStoryFragment())
+                findNavController().navigate(MainFragmentDirections.actionMainFragmentToAddStoryFragment())
             }
             adapterStories = RecyclerViewStory(this@DashboardFragment)
             rvStory.adapter = adapterStories.withLoadStateFooter(
@@ -65,7 +69,6 @@ class DashboardFragment : Fragment(), RecyclerViewStory.StoriesClicked {
     }
 
     override fun onItemClicked(item: StoryModel, img: AppCompatImageView) {
-
         item.photoUrl?.let {
             findNavController().navigate(
                 DashboardFragmentDirections.actionDashboardFragmentToDetailStoryFragment(item),
@@ -74,8 +77,5 @@ class DashboardFragment : Fragment(), RecyclerViewStory.StoriesClicked {
                 )
             )
         }
-
     }
-
-
 }

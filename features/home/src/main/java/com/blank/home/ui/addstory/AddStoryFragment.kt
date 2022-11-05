@@ -21,7 +21,6 @@ import com.esafirm.imagepicker.model.Image
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import java.io.File
 
-
 class AddStoryFragment : Fragment() {
 
     private var _binding: FragmentAddStoryBinding? = null
@@ -29,7 +28,8 @@ class AddStoryFragment : Fragment() {
     private val viewModelAddStory: AddStoryViewModel by viewModel()
     private var imageUri: Image? = null
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentAddStoryBinding.inflate(inflater, container, false)
@@ -52,7 +52,7 @@ class AddStoryFragment : Fragment() {
                     }
                 }
                 Resource.Status.SUCCESS -> {
-                    findNavController().navigateUp()
+                    findNavController().navigate(AddStoryFragmentDirections.actionAddStoryFragmentToMainFragment())
                 }
                 Resource.Status.ERROR -> {
                     binding?.apply {
@@ -94,16 +94,15 @@ class AddStoryFragment : Fragment() {
                             viewModelAddStory.uploadStory(desc, File(pathActual))
                         }
                     }
-                } else
+                } else {
                     Toast.makeText(context, "Terdapat data yang belum di isi", Toast.LENGTH_SHORT)
                         .show()
-
+                }
             }
 
             toolbar.apply {
                 setNavigationOnClickListener {
-                    if (!findNavController().navigateUp())
-                        requireActivity().finish()
+                    findNavController().navigate(AddStoryFragmentDirections.actionAddStoryFragmentToMainFragment())
                 }
                 setNavigationIcon(com.blank.ui.R.drawable.ic_baseline_arrow_back_ios_new_24)
                 title = resources.getString(com.blank.ui.R.string.add_story)
@@ -119,7 +118,10 @@ class AddStoryFragment : Fragment() {
             val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
             val cursor: Cursor? = requireActivity().contentResolver.query(
                 image.uri,
-                filePathColumn, null, null, null
+                filePathColumn,
+                null,
+                null,
+                null
             )
             cursor?.moveToFirst()
             val columnIndex: Int? = cursor?.getColumnIndex(filePathColumn[0])
@@ -138,5 +140,4 @@ class AddStoryFragment : Fragment() {
         super.onDestroy()
         _binding = null
     }
-
 }

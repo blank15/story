@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.blank.domain.model.Resource
 import com.blank.domain.repository.StoriesRepository
 import com.blank.model.database.StoryModel
@@ -22,9 +23,11 @@ class DashboardViewModel(private val storiesRepository: StoriesRepository) : Vie
 
     fun getStories() {
         viewModelScope.launch {
-            storiesRepository.getStories().onEach {
-                _stories.value = it
-            }.collect()
+            storiesRepository.getStories()
+                .cachedIn(viewModelScope)
+                .onEach {
+                    _stories.value = it
+                }.collect()
         }
     }
 
