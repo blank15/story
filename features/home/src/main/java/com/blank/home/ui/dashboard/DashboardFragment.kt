@@ -71,7 +71,7 @@ class DashboardFragment : Fragment(), RecyclerViewStory.StoriesClicked {
     override fun onItemClicked(item: StoryModel, img: AppCompatImageView) {
         item.photoUrl?.let {
             findNavController().navigate(
-                DashboardFragmentDirections.actionDashboardFragmentToDetailStoryFragment(item),
+                MainFragmentDirections.actionMainFragmentToDetailStoryFragment(item),
                 FragmentNavigatorExtras(
                     img to it
                 )

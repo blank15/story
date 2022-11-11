@@ -3,7 +3,6 @@ package com.blank.home
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import androidx.paging.AsyncPagingDataDiffer
-import androidx.paging.PagingData
 import androidx.test.filters.SmallTest
 import com.blank.domain.model.ErrorResponse
 import com.blank.domain.model.Resource
@@ -21,7 +20,7 @@ import kotlinx.coroutines.test.UnconfinedTestDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
-import org.junit.*
+import org.junit.* // ktlint-disable no-wildcard-imports
 import org.junit.runner.RunWith
 import org.junit.runners.JUnit4
 
@@ -34,11 +33,10 @@ class DashBoardViewModelTest {
     @JvmField
     val instantExecutorRule = InstantTaskExecutorRule()
 
-    val testDispatchers = UnconfinedTestDispatcher()
-    lateinit var storiesRepository: StoriesRepository
-    lateinit var dashboardViewModel: DashboardViewModel
-    val storiesMapObserver = mockk<Observer<Resource<List<StoryModel>>>>(relaxed = true)
-    val storiesObserver = mockk<Observer<PagingData<StoryModel>>>(relaxed = true)
+    private val testDispatchers = UnconfinedTestDispatcher()
+    private lateinit var storiesRepository: StoriesRepository
+    private lateinit var dashboardViewModel: DashboardViewModel
+    private val storiesMapObserver = mockk<Observer<Resource<List<StoryModel>>>>(relaxed = true)
 
     @Before
     fun setUp() {
@@ -46,7 +44,6 @@ class DashBoardViewModelTest {
         storiesRepository = mockk()
         dashboardViewModel = DashboardViewModel(storiesRepository).apply {
             storiesMap.observeForever(storiesMapObserver)
-            stories.observeForever(storiesObserver)
         }
     }
 
@@ -55,14 +52,13 @@ class DashBoardViewModelTest {
         Dispatchers.resetMain()
     }
 
-
     @Test
     fun `when get stories with paging return success`() = runTest {
-        //given
+        // given
         val data = DummyData.generateData()
         val dataPaging = PagingSourceHelperTest.snapshot(data)
 
-        //when
+        // when
         coEvery {
             storiesRepository.getStories()
         } returns flow {
@@ -73,30 +69,25 @@ class DashBoardViewModelTest {
         val differ = AsyncPagingDataDiffer(
             diffCallback = RecyclerViewStory.DIFF_CALLBACK,
             updateCallback = noopListUpdateCallback,
-            workerDispatcher = Dispatchers.Main,
+            workerDispatcher = Dispatchers.Main
         )
         dashboardViewModel.stories.value?.let { differ.submitData(it) }
 
-        //result
-        verifyOrder {
-            storiesObserver.onChanged(dataPaging)
-        }
+        // result
 
         Assert.assertNotNull(differ.snapshot())
         Assert.assertEquals(data, differ.snapshot())
         Assert.assertEquals(data.size, differ.snapshot().size)
         Assert.assertEquals(data[0].id, differ.snapshot()[0]?.id)
-
     }
-
 
     @Test
     fun `when get Stories map return success`() {
-        //given
+        // given
         val result = DummyData.generateData()
         val responseSuccess = Resource.success(result)
 
-        //when
+        // when
         coEvery {
             storiesRepository.getStoriesForMap()
         } returns flow {
@@ -114,10 +105,10 @@ class DashBoardViewModelTest {
 
     @Test
     fun `when get Stories map return failed`() {
-        //given
+        // given
         val responseSuccess = Resource.error(ErrorResponse(true, "Kendala pada server"), null)
 
-        //when
+        // when
         coEvery {
             storiesRepository.getStoriesForMap()
         } returns flow {
@@ -130,5 +121,4 @@ class DashBoardViewModelTest {
         }
         Assert.assertEquals(Resource.Status.ERROR, dashboardViewModel.storiesMap.value?.status)
     }
-
 }

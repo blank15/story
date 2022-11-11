@@ -8,9 +8,7 @@
         android:id="@+id/dashboardFragment"
         android:name="com.blank.home.ui.dashboard.DashboardFragment"
         android:label="DashboardFragment">
-        <action
-            android:id="@+id/action_dashboardFragment_to_detailStoryFragment"
-            app:destination="@id/detailStoryFragment" />
+
         <action
             android:id="@+id/action_dashboardFragment_to_mapFragment"
             app:destination="@id/mapFragment" />
@@ -23,6 +21,9 @@
         android:id="@+id/mainFragment"
         android:name="com.blank.home.ui.MainFragment"
         android:label="MainFragment">
+        <action
+            android:id="@+id/action_mainFragment_to_detailStoryFragment"
+            app:destination="@id/detailStoryFragment" />
         <action
             android:id="@+id/action_mainFragment_to_loginFragment"
             app:destination="@id/loginFragment"

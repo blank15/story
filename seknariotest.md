@@ -33,7 +33,7 @@ DashboardViewModelTest
 1. Saat mengambil data paging dengan kembalian sukses
 
 - Memastikan data adapter tidal kosong
-- memastikan adat yang di terima dari repository dan data adapter sama
+- memastikan data yang di terima dari repository dan data adapter sama
 - memastikan jumlah data sama
 - memastikan id pada data pertama sama
 
@@ -53,7 +53,9 @@ AuthRepositoryTest
 1. Saat Login dan berhasil
 
 - memastikan response yang di terima sama dengan dataLogin yang diberikan dari service
-    1. Saat Register dan berhasil
+
+2. Saat Register dan berhasil
+
 - memastikan response message yang di terima sama dengan message yang diberikan dari service
 
 PagingMediatorTest
